@@ -570,7 +570,7 @@ wheels = [
 [[package]]
 name = "deep-mca"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "datasets" },
     { name = "polars" },
@@ -583,6 +583,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "ipykernel" },
     { name = "jupyterlab" },
     { name = "matplotlib" },
     { name = "pytest" },
@@ -603,6 +604,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "ipykernel", specifier = ">=7.1.0" },
     { name = "jupyterlab", specifier = ">=4.5.2" },
     { name = "matplotlib", specifier = ">=3.10.8" },
     { name = "pytest", specifier = ">=9.0.2" },

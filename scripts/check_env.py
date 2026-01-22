@@ -16,8 +16,14 @@ def check_env():
         raise Exception("PyTorch is not installed")
 
     # check llvm
+    mc_path = shutil.which("llvm-mc")
     mca_path = shutil.which("llvm-mca")
     objdump_path = shutil.which("llvm-objdump")
+
+    if mc_path:
+        print("llvm-mc was found")
+    else:
+        raise Exception("llvm-mc is not installed")
 
     if mca_path:
         print("llvm-mca was found")
