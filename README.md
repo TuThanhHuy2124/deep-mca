@@ -1,24 +1,41 @@
 # deep-mca
 
-# setup
-- Download `uv`, `llvm`
-- `uv sync`
-- `uv run scripts/check_env.py`
 
-# lint
-`./scripts/lint.sh`
+## Setup
 
-# data
+Requires `uv` and LLVM tools.
 
-https://huggingface.co/datasets/stevenhe04/x86-bb-24m
+```bash
+uv sync
+uv run scripts/check_env.py
+```
 
-# useful links
-remove this later
+If available install mamba-ssm CUDA kernels for speeeeeed.
 
-https://github.com/state-spaces/mamba
+```bash
+uv sync --group cuda
+```
 
-https://arxiv.org/pdf/1808.07412
 
-https://dl.acm.org/doi/pdf/10.1145/3640537.3641572
+## Finetuning
 
-https://ieeexplore.ieee.org/document/9042166
+```bash
+uv run deep-mca-finetune --config configs/finetune.yaml
+```
+
+## Lint
+
+```bash
+./scripts/lint.sh
+```
+
+## Data
+
+- Pretraining corpus: [stevenhe04/x86-bb-24m](https://huggingface.co/datasets/stevenhe04/x86-bb-24m)
+
+## References
+
+- [Mamba: Linear-Time Sequence Modeling with Selective State Spaces](https://github.com/state-spaces/mamba)
+- [Ithemal: Accurate, Portable and Fast Basic Block Throughput Estimation](https://arxiv.org/pdf/1808.07412)
+- [BHive: A Benchmark Suite and Measurement Framework](https://dl.acm.org/doi/pdf/10.1145/3640537.3641572)
+- [Learning to Optimize Tensor Programs](https://ieeexplore.ieee.org/document/9042166)
