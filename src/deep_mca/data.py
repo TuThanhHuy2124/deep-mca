@@ -16,6 +16,7 @@ BOS_ID = tokenizer.vocab["<BOS>"]
 EOS_ID = tokenizer.vocab["<EOS>"]
 VOCAB_SIZE = len(tokenizer.vocab) + len(tokenizer.reg_vocab)
 
+
 def hex_to_tokens(hex_str: str):
     asm_lines = disassemble_hex(hex_str)
     token_dicts = tokenizer.tokenize_block(asm_lines)

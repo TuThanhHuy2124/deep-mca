@@ -3,12 +3,18 @@ import json
 import math
 import re
 
+
 class TextAssemblyTokenizer:
     PATH = "./vocab.json"
 
     def __init__(self):
         # Vocabularies
-        self.vocab = {"<PAD>": 0, "<UNK>": 1, "<BOS>": 2, "<EOS>": 3,}
+        self.vocab = {
+            "<PAD>": 0,
+            "<UNK>": 1,
+            "<BOS>": 2,
+            "<EOS>": 3,
+        }
         self.reg_vocab = {"<NONE>": 0, "<UNK>": 1}
         if Path(TextAssemblyTokenizer.PATH).exists():
             self._load_vocab()
@@ -29,29 +35,25 @@ class TextAssemblyTokenizer:
 
     def _save_vocab(self):
         """Save vocabs to JSON file."""
-        if (self.vocab_length == len(self.vocab) and 
-            self.reg_vocab_length == len(self.reg_vocab)):
+        if self.vocab_length == len(self.vocab) and self.reg_vocab_length == len(self.reg_vocab):
             return
-        
-        with open(TextAssemblyTokenizer.PATH, 'w') as f:
-            json.dump({
-                'vocab': self.vocab,
-                'reg_vocab': self.reg_vocab
-            }, f)
-        
+
+        with open(TextAssemblyTokenizer.PATH, "w") as f:
+            json.dump({"vocab": self.vocab, "reg_vocab": self.reg_vocab}, f)
+
         self.vocab_length = len(self.vocab)
         self.reg_vocab_length = len(self.reg_vocab)
 
     def _load_vocab(self):
         """Load vocabs from JSON file."""
-        with open(TextAssemblyTokenizer.PATH, 'r') as f:
+        with open(TextAssemblyTokenizer.PATH, "r") as f:
             data = json.load(f)
-        self.vocab = data['vocab']
-        self.reg_vocab = data['reg_vocab']
+        self.vocab = data["vocab"]
+        self.reg_vocab = data["reg_vocab"]
 
     def _get_id(self, key, vocab):
         if key not in vocab:
-            if getattr(self, '_frozen', False):
+            if getattr(self, "_frozen", False):
                 return vocab["<UNK>"]  # Use unknown token
             vocab[key] = len(vocab)
         return vocab[key]
@@ -108,6 +110,6 @@ class TextAssemblyTokenizer:
                     instr_data["numerical"].append(self.normalize_value(disp_str))
 
             tokenized_block.append(instr_data)
-        
+
         self._save_vocab()
         return tokenized_block
